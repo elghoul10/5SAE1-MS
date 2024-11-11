@@ -1,0 +1,31 @@
+.pageWrapper {
+  padding: 100px !important;
+  min-height: calc(100vh - 70px);
+  margin: 0 auto;
+  max-width: 1802px !important;
+}
+.dash__instructor-home__welcome__txt-2 {
+  font-family: "Hind", sans-serif;
+  color: #fdfdfd;
+  margin-top: 0px;
+  font-weight: 700;
+  line-height: 1.2;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+.stat-box__title {
+  color: #ffffff;
+}
+.chart-heading {
+  color: #fdfdfd;
+}
+.dash__instructor-home {
+  overflow: hidden;
+  overflow-y: auto; /* Remplacer 'scroll' par 'auto' */
+  height: calc(100% - 11rem);
+  border-radius: 2rem;
+  padding: 0 1rem;
+}

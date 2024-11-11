@@ -1,0 +1,17 @@
+<mat-error
+  *ngIf="
+    (fieldIn.invalid && (fieldIn.touched || fieldIn.dirty)) || isFormSubmitedIn
+  "
+>
+  <span *ngIf="fieldIn.errors?.['required']">This field is required.</span>
+  <span *ngIf="fieldIn.errors?.['minlength']"
+    >This field must be at least 3 characters.</span
+  >
+  <span
+    *ngIf="fieldIn.errors?.['pattern']?.['requiredPattern'] === '^[a-zA-Z]+[a-zA-Z ]*$'"
+    >This field should contain only letters.</span
+  >
+  <span *ngIf="fieldIn.errors?.['pattern']?.['requiredPattern'] === '^[0-9]+$'"
+    >This field should contain only positive number.</span
+  >
+</mat-error>

@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:900i');
+
+* {
+  box-sizing: border-box;
+}
+/*
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}*/
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  position:relative;
+  top: 300px;
+  right:640px;
+  width: 100px;
+}
+
+.cta {
+   
+    display: flex;
+    padding: 10px 45px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    color: white;
+    background: #085191;
+    transition: 1s;
+    box-shadow: 6px 6px 0 rgb(25, 155, 230);
+    transform: skewX(-15deg);
+     height: 60px;
+}
+
+.cta:focus {
+   outline: none; 
+}
+
+.cta:hover {
+    transition: 0.5s;
+    box-shadow: 10px 10px 0 #5a89af;
+}
+
+.cta .span_transform {
+    transition: 0.5s;
+    margin-right: 0px;
+}
+
+.cta:hover  .span_transform {
+    transition: 0.5s;
+    margin-right: 45px;
+}
+
+  .span_transform {
+    transform: skewX(15deg);
+
+  }
+
+  .span_transform {
+    width: 10px;
+    height: 10px;
+    margin-left: 30px;
+    position: relative;
+    top: 5%;
+  }
+  
+/**************SVG****************/
+
+path.one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+}
+
+path.two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+}
+
+.cta:hover path.three {
+    animation: color_anim 1s infinite 0.2s;
+}
+
+.cta:hover path.one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+}
+
+.cta:hover path.two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+}
+
+/* SVG animations */
+
+@keyframes color_anim {
+    0% {
+        fill: white;
+    }
+    50% {
+        fill: #fb7638;
+    }
+    100% {
+        fill: white;
+    }
+}
+
+
+.dash__instructor-my-courses__title{
+    font-size: 5.4rem;
+    font-weight:bold;
+    font-style:oblique;
+    color: #085191;
+    margin-bottom: 5rem;
+  position:absolute;
+  top: 280px; left: 350px;
+  text-align: center;
+
+}
+
+.btn_pos_quiz{
+  position: relative;
+  left: 350px;
+}

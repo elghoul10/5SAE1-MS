@@ -1,0 +1,335 @@
+.course__card{
+    // width: 50rem;
+    // min-height: 50rem;
+    padding: 1rem 1rem 3.5rem 1rem;
+    background-color: #fff;
+    border-radius: 5rem;
+    box-shadow: 0 .5rem 2rem rgba(58, 41, 41, 0.05);
+    color: $dark-font-color;
+    font-size: 1.7rem;
+    font-weight: 800;
+    backface-visibility: hidden;
+    transition: 0.5s transform;
+    transform: translateZ(0);
+    cursor: pointer;
+
+    &__thumbnail-container{
+        width: 100%;
+        height: 25rem;
+        // background: #000;
+        border-radius: 5rem;
+    }
+
+    &__thumbnail{
+        height: 100%;
+        width: 100%; 
+        object-fit: cover;
+        border-radius: 5rem;
+    }
+
+    &__category-price{
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__category{
+        background-color: $tertiary;
+        border-radius: 10rem;
+        padding: 1rem 1.2rem;
+    }
+
+    &__price{
+        font-size: 1.9rem;
+        margin-right: 2rem;
+        font-weight: 800;
+    }
+
+    &__title{
+        margin-top: 2rem;
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    &__instructor-name{
+        margin: 3rem 0 1rem 0 ;
+        font-weight: 800;
+        color: black;
+        padding: 0 1rem;
+    }
+
+    &__stat{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        padding: 0 1rem;
+
+        &__rating-container{
+            display: flex;
+            align-items: center;
+        }
+
+        &__stars{
+            margin: .5rem 1rem 0 1rem;
+        }
+
+        &__star-icon{
+            width: 2rem;
+        }
+
+        &__student{
+            display: flex;
+            align-items: center;
+
+            &-icon{
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    &:hover{
+        transform: perspective(1px) scale(1.02);
+        box-shadow: 0 .5rem 3rem rgba(58, 41, 41, 0.1);
+    }
+}
+
+.course__card-v2{
+    min-width: 60rem;
+    max-width: 90rem;
+    height: 13rem;
+    background-color: white;
+    box-shadow: 0 .2rem 2rem rgba(0, 0, 0, 0.09);
+    border-radius: 3rem;
+    margin-bottom: 2.5rem;
+
+    display: flex;
+
+    &__img{
+        border-radius: 3rem;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+
+        &-container{
+            &-v2{
+                min-width: unset !important;
+            }
+            width: 21rem;
+
+            // height: 13rem;
+            // background-color: red;
+            border-radius: 3rem;   
+            margin-right: 1rem; 
+        }
+    }
+
+    &__content{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__title{
+        color: $dark-font-color;
+        font-size: 1.9rem;
+    }
+
+    &__title2{
+        color: $dark-font-color;
+        font-size: 1.9rem;
+        min-width: 60rem;
+
+        &__instructor{
+            color: $dark-font-color-2;
+            span{
+                color: $secondary;
+            }
+        }
+    }
+
+    &__cate-action{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__category{
+        padding: 1rem 2rem;
+        background-color: #F5F1F6;
+        border-radius: 10rem;
+        color: $dark-font-color;
+        font-size: 1.4rem;
+    }
+    // &__action-btns{
+
+    // }
+
+    &__btn{
+        display: inline-block;
+        border-radius: 10rem;
+        background-color: rgba(255, 115, 68, 0.85);
+        text-decoration: none;
+        transition: all 0.3s;
+        margin-right: 0.3rem;
+
+        &-view{
+            padding: 1.15rem 1.3rem;
+        }
+
+        &-update{
+            padding: 0.9rem 1.5rem;
+        }
+
+        &-delete{
+            padding: 0.9rem 1.65rem;
+        }
+
+        &-icon{
+            width: 2.3rem;
+
+            &-update{
+            width: 1.85rem;
+            // height: 1.5rem;
+            }
+
+            &-delete{
+                width: 1.5rem;
+                // height: 1.5rem;
+                }
+        }
+
+        &:hover{
+            background-color: $secondary;
+            box-shadow: 0 .5rem 2rem rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+.course__card-v3{
+    // width: 50rem;
+    // min-height: 50rem;
+    width: 31rem;
+    padding: 1rem 1rem 3.5rem 1rem;
+    background-color: #fff;
+    border-radius: 5rem;
+    box-shadow: 0 .5rem 2rem rgba(58, 41, 41, 0.05);
+    color: $dark-font-color;
+    font-size: 1.6rem;
+    font-weight: 800;
+    backface-visibility: hidden;
+    transition: 0.5s transform;
+    transform: translateZ(0);
+    cursor: pointer;
+
+    &__thumbnail-container{
+        width: 100%;
+        height: 16rem;
+        // background: #000;
+        border-radius: 5rem;
+    }
+
+    &__thumbnail{
+        height: 100%;
+        width: 100%; 
+        object-fit: cover;
+        border-radius: 5rem;
+    }
+
+    &__category-price{
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__category{
+        background-color: $tertiary;
+        border-radius: 10rem;
+        padding: 1rem 1.2rem;
+    }
+
+    &__price{
+        font-size: 1.6rem;
+        margin-right: 2rem;
+        font-weight: 800;
+    }
+
+    &__title{
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+
+    &__instructor-name{
+        margin: 2.5rem 0 1rem 0 ;
+        font-weight: 800;
+        color: black;
+        padding: 0 1rem;
+        font-size: 1.4rem;
+    }
+
+    &__stat{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.4rem;
+        
+        padding: 0 1rem;
+
+        &__rating-container{
+            display: flex;
+            align-items: center;
+        }
+
+        &__stars{
+            margin: .5rem 1rem 0 1rem;
+        }
+
+        &__star-icon{
+            width: 1.4rem;
+        }
+
+        &__student{
+            display: flex;
+            align-items: center;
+
+            &-icon{
+                margin-right: 1rem;
+                width: 2rem;
+            }
+        }
+    }
+
+    &:hover{
+        transform: perspective(1px) scale(1.02);
+        box-shadow: 0 .5rem 3rem rgba(58, 41, 41, 0.1);
+    }
+
+    &__addCart{
+        position: absolute;
+        top: 2.5%;
+        left: 50%;
+        z-index: 10;
+        transform: translateX(-50%);
+        background-color: rgba(101, 103, 243, 0.4);
+        width: 94%;
+        height: 16rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5rem;
+        transition: all 0.2s;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &:hover > &__addCart{
+        opacity: 1;
+        visibility:visible;
+    }
+
+
+    
+}

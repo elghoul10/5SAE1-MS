@@ -1,0 +1,140 @@
+.dash__instructor-home__content__right-side__chart {
+    padding: 4rem 3rem;
+    color: #fff;
+    background-color: #201d39;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 3rem;
+  }
+  
+  .chart-heading {
+    font-size: 2.4rem;
+    margin-bottom: 6rem;
+  }
+.dash__instructor-my-courses__title
+{
+    font-size: 32px;
+    font-weight:140px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.question 
+{
+    position:absolute;
+    top: 170px;
+    left: 340px;
+    color: black;
+    font-size: 23px;
+    font-weight: 300px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+#quiz #optionList {
+    display:block;
+    height: 400px;
+    width:100px;
+    position: absolute;
+   
+    top: 230px;
+    left:350px;
+}
+
+#quiz #optionList button {
+    display:inline-flex;
+    height: 35px;
+    width: 400px;
+    background-color: #d6dbfd;
+    line-height: 50px;
+    margin: 5px 0;
+    border-radius: 15px;
+    padding: 0 20px;
+    font-size: 19px;
+    text-align: 100px;
+    color: rgb(5, 5, 5);
+    overflow: hidden;
+    border: 1px solid #b0c4d8;
+    cursor: pointer;
+   
+}
+#quiz #optionList span {
+    position:relative;
+  bottom: 9px;
+  font-family:sans-serif;
+}
+
+
+
+#quiz #optionList button:hover {
+    background-color: #b0c4d8;
+}
+#quiz #optionList button:focus {
+    background-color: #6568f3;
+}
+#quiz #optionList button[valid]:focus {
+    background-color: #6568f3;
+}
+
+
+.pagination 
+{
+    position:absolute;
+    top: 300px;
+    left: 850px;
+    color: black;
+    background-color: #d6dbfd;
+}
+
+h2 {
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    bottom: 5px;
+}
+h2:before,
+h2:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+.next 
+{
+    position: absolute;
+    top: 380px;
+    left: 930px;
+    color:  #6079e7;
+    font-size: 15px;
+    font-weight:bold;
+    background-color:#d6dbfd;
+    border-radius: 15px;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid #a7bed6;
+
+    
+}
+.next:hover
+{
+ 
+    font-size: 17px;
+    font-weight:bold;
+    background-color:#b0c4d8;
+    border: 1px solid #b0c4d8;
+   
+}
+.qa_footer
+  {
+      position: absolute;
+      top: 125px;
+      left: 1050px;
+      color: #585856;
+   
+      font-size: 20px;
+      font-weight:160px;
+      font-family: 'Times New Roman';
+    
+        
+  }

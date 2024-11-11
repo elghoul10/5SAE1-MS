@@ -1,0 +1,15 @@
+.tableImage {
+  &__container {
+    width: 80px;
+    height: 60px;
+    border-radius: 2rem;
+    margin-right: 5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  width: 100px;
+  height: 100%;
+  border-radius: 2rem;
+  object-fit: cover;
+}

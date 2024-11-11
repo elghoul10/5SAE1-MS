@@ -1,0 +1,4 @@
+FROM openjdk:8
+EXPOSE 8083
+ADD target/MS-Client-0.0.1-SNAPSHOT.jar client-img.jar
+ENTRYPOINT ["java", "-jar", "client-img.jar"]

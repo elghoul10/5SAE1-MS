@@ -1,0 +1,107 @@
+version: "3.9"
+services:
+  event:
+    build: .\event
+    image: "event.jar"
+    container_name: event
+    ports:
+      - "8081:8081"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+    restart: unless-stopped
+    depends_on:
+      - eureka
+
+  article:
+    build: .\article
+    image: "article.jar"
+    container_name: article
+    ports:
+      - "8090:8090"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+    restart: unless-stopped
+    depends_on:
+      - eureka
+
+  client:
+    build: .\MS_Client
+    image: "client-img"
+    container_name: client
+    ports:
+      - "8083:8083"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/MS-Specialite?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    restart: unless-stopped
+    depends_on:
+      - eureka
+      - mysql-db
+
+  ordre:
+    build: .\OrdredeTrans
+    image: "order.jar"
+    container_name: ordre
+    ports:
+      - "8085:8085"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/educal_news?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    restart: unless-stopped
+    depends_on:
+      - eureka
+      - mysql-db
+
+  eureka:
+    build: .\EurekaD
+    image: "eureka-img"
+    container_name: "eureka"
+    ports:
+      - "8761:8761"
+    hostname: discovery
+
+  gateway:
+    build: .\ApiGateway
+    image: "gateway-img"
+    container_name: "gateway"
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+
+      - spring_cloud_gateway_routes[0]_id=client
+      - spring_cloud_gateway_routes[0]_uri=http://client:8083
+      - spring_cloud_gateway_routes[0]_predicates[0]=Path=/clients/**
+
+      - spring_cloud_gateway_routes[1]_id=event
+      - spring_cloud_gateway_routes[1]_uri=http://event:8081
+      - spring_cloud_gateway_routes[1]_predicates[0]=Path=/event/**
+
+      - spring_cloud_gateway_routes[2]_id=article
+      - spring_cloud_gateway_routes[2]_uri=http://article:8090
+      - spring_cloud_gateway_routes[2]_predicates[0]=Path=/article/**
+
+      - spring_cloud_gateway_routes[3]_id=ordre
+      - spring_cloud_gateway_routes[3]_uri=http://ordre:8085
+      - spring_cloud_gateway_routes[3]_predicates[0]=Path=/ordre/**
+
+    depends_on:
+      - eureka
+      - event
+      - ordre
+      - article
+      - client
+
+  mysql-db:
+    image: "mysql:5.6"
+    container_name: "mysql-db"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root #indisponsable pour la conteneurisation
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+

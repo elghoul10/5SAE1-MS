@@ -1,0 +1,27 @@
+.instructor-call{
+    position: relative;
+    margin: 10rem 0 30rem 0;
+    padding: 0 5rem;
+    overflow: hidden !important;
+    &__img{
+        width: 100%;
+    }
+
+    &__content{
+        position: absolute;
+        top: 25%;
+        right: 12%;
+        text-align: center;
+
+
+        &__txt{
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: $dark-font-color;
+        }
+
+        &__btn{
+            margin-top: 4rem;
+        }
+    }
+}

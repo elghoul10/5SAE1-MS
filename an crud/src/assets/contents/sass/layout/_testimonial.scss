@@ -1,0 +1,77 @@
+.testimonial{
+    // overflow: hidden !important;
+    overflow: hidden !important;
+    padding: 7rem 4rem;
+    position: relative;
+    &__container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__heading{
+        font-size: 4rem;
+        color: #3D3D3D;
+        font-weight: 800;
+        text-align: center;
+        span{
+            color: $secondary;
+        }
+        margin-bottom: 7rem;
+    }
+
+    &__btn{
+
+        text-align: center;
+        margin-top: 4rem;
+
+        &__next{
+            position: relative;
+            padding: 2.5rem;
+            border: .5rem solid $primary-light;
+            border-radius: 100rem;
+            background-color: $body-bg-color;
+            width: 4rem;
+            height: 4rem;
+            color: $primary-light;
+            transition: all 0.2s;
+            cursor: pointer;
+            &-icon{
+                position: absolute;
+                top: 50%;
+                left: 53%;
+                transform: translate(-50%,-50%);
+                width: 2.2rem;
+                fill: currentColor;
+            }
+
+            &:hover{
+            border: .5rem solid $secondary;
+            color: $secondary;
+            }
+        }
+
+        &__prev{
+            transform: rotateZ(180deg);
+            margin-right: 2rem;
+        }
+    }
+}
+
+.animated-elipse-4{
+    z-index: -2;
+    position: absolute;
+    top: -2%;
+    left: -10%;
+    width: 30rem;
+    animation: elipse-animation-2 60s ease infinite;
+}
+
+.animated-elipse-5{
+    z-index: -2;
+    position: absolute;
+    top: -30%;
+    right: -15%;
+    width: 50rem;
+    animation: elipse-animation-2 60s ease infinite;
+}

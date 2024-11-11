@@ -1,0 +1,39 @@
+.stat-box{
+
+    &__container{
+        padding: 1rem 6rem 1rem 3rem;
+        background-color: $primary-light;
+        border-radius: 3rem;
+        min-height: 17rem; 
+        margin-bottom: 4rem;
+        box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.15);
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__title{
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    &__content{
+        text-align: center;
+
+        &__ill{
+            width: 15rem;
+            margin-right: 1rem;
+
+            &-1{
+                width: 18rem;
+            }
+        }
+
+        &__data{
+            font-size: 6rem;
+            color: $secondary;
+        }
+    }
+}

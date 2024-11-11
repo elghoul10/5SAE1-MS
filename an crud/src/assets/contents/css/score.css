@@ -1,0 +1,92 @@
+
+
+table td 
+{
+    border-radius: 0.5rem;    
+     border: 5px ridge #6568f3;
+
+     padding: 8px 15px;
+     font-weight: 500;
+
+     width: 50%;
+     text-align: left;
+     font-size: 18px;
+     position: relative;
+     left: 35%;
+     top: 10rem;
+}
+
+.next 
+{
+position: absolute;
+top: 500px;
+left: 700px;
+  color:  #6079e7;
+  font-size: 15px;
+  font-weight:bold;
+  background-color:#d6dbfd;
+  border-radius: 15px;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  border: 1px solid #a7bed6;
+
+  
+}
+.next:hover
+{
+
+  font-size: 17px;
+  font-weight:bold;
+  background-color:#b0c4d8;
+  border: 1px solid #b0c4d8;
+ 
+}
+
+
+.preview 
+{
+position: absolute;
+top: 500px;
+left: 450px;
+  color:  #6079e7;
+  font-size: 15px;
+  font-weight:bold;
+  background-color:#d6dbfd;
+  border-radius: 15px;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  border: 1px solid #a7bed6;
+
+  
+}
+.preview:hover
+{
+
+  font-size: 17px;
+  font-weight:bold;
+  background-color:#b0c4d8;
+  border: 1px solid #b0c4d8;
+ 
+}
+
+
+.total-question{
+    font-size: 2rem;
+    color: #585856;
+    text-align: center;
+}
+
+.total-correct{
+    font-size: 2rem;
+    color: rgb(13, 197, 13);
+    text-align: center;
+
+}
+
+
+.td_titre{
+    font-size: 2.5rem;
+    color: #585856;
+}

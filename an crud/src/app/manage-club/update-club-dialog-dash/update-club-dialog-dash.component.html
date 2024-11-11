@@ -1,0 +1,127 @@
+<h1 mat-dialog-title style="margin-bottom: 1rem">Update Club</h1>
+
+<div mat-dialog-content>
+  <!-- Your form or content for adding a user goes here -->
+  <div class="contact__form">
+    <form #updateForm="ngForm" (ngSubmit)="submitForm(updateForm)">
+      <div class="row">
+        <div class="col-12 m-b-30">
+          <div class="contact__form-input__image__container">
+            <img
+              class="contact__form-input__image"
+              [src]="imageUrl"
+              alt="Image Preview"
+            />
+          </div>
+          <div class="contact__form-input contact__form-input__image__btns">
+            <input
+              type="file"
+              accept="image/*"
+              id="Image"
+              name="imgUrl"
+              ngModel
+              #fileInput
+              style="display: none"
+              (change)="onFileSelected($event)"
+            />
+            <!-- Button to trigger file input click -->
+            <button
+              type="button"
+              mat-flat-button
+              class="Extended-Fab"
+              (click)="triggerFileInputClick()"
+            >
+              <span class="Extended-Fab__container">
+                <i-tabler
+                  class="routeIcon Extended-Fab__icon"
+                  name="cloud-upload"
+                  matListItemIcon
+                ></i-tabler>
+                <span class="Extended-Fab__text">Select Image</span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              mat-flat-button
+              class="Extended-Fab Extended-Fab--2 m-l-16"
+              (click)="resetAvatarImage()"
+            >
+              <span class="Extended-Fab__container">
+                <i-tabler
+                  class="routeIcon Extended-Fab__icon"
+                  name="photo-cancel"
+                  matListItemIcon
+                ></i-tabler>
+                <span class="Extended-Fab__text">Reset Image</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label class="contact__form-input-label" for="nom">Name</label>
+            <input
+              #nomField="ngModel"
+              type="text"
+              placeholder="Club Name"
+              id="nom"
+              name="courseTitle"
+              [(ngModel)]="data.courseTitle"
+            />
+          </div>
+        </div>
+
+        <div class="col-12" style="margin-bottom: 8px">
+          <div
+            class="contact__form-input"
+            style="display: flex; flex-direction: column"
+          >
+            <label for="University" style="margin-bottom: 0.5rem"
+              >University</label
+            >
+
+            <mat-form-field>
+              <mat-select
+                #uniField="ngModel"
+                class="mat-select-trigger"
+                id="university"
+                name="universites"
+                placeholder="Select University"
+                [(ngModel)]="data.specialite.nomUniversite"
+                required
+              >
+                <mat-option
+                  *ngFor="let universite of universites"
+                  [value]="universite.nomUniversite"
+                  >{{
+                    universite.nomUniversite.charAt(0).toUpperCase() +
+                      universite.nomUniversite.slice(1).toLowerCase()
+                  }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="Description">Description</label>
+            <textarea
+              placeholder="Enter Your Description"
+              id="Description"
+              name="courseDescription"
+              [(ngModel)]="data.courseDescription"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-12" style="margin-top: 1rem">
+          <button type="submit" mat-flat-button color="primary">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- <div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="closeDialog()"></button>
+</div> -->
