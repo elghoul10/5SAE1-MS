@@ -11,6 +11,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserFeignClient jobUserService;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -24,7 +26,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void deleteUser(Integer id) {
-        userRepository.deleteById(id);
-    }
+    public String deleteUser(Integer id) {
+            if (userRepository.findById(id).isPresent()) { userRepository.deleteById(id);
+                return "candidat supprimé";
+            } else
+                return "candidat non supprimé";
+        }
+
+
+
+
 }

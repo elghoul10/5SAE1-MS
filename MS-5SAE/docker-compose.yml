@@ -89,6 +89,11 @@ services:
       - spring_cloud_gateway_routes[3]_uri=http://ordre:8085
       - spring_cloud_gateway_routes[3]_predicates[0]=Path=/ordre/**
 
+
+      - spring_cloud_gateway_routes[4]_id=user
+      - spring_cloud_gateway_routes[4]_uri=http://user:8085
+      - spring_cloud_gateway_routes[4]_predicates[0]=Path=/Users/**
+
     depends_on:
       - eureka
       - event
