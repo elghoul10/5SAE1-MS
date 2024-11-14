@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserRestAPI {
     @Autowired
     private UserService userService;
@@ -38,5 +38,10 @@ public class UserRestAPI {
     @RequestMapping("/GetUser")
     public Optional<User> getUser(@PathVariable(value = "id") int id){
         return userService.getUserById(id);
+    }
+
+    @RequestMapping("/login")
+    public String login(@RequestParam String email, @RequestParam String password){
+        return userService.login(email, password);
     }
 }

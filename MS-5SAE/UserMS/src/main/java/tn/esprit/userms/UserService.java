@@ -33,7 +33,13 @@ public class UserService {
                 return "candidat non supprimé";
         }
 
-
+    public String login(String email,String password){
+        if(userRepository.existsByEmailAndPassword(email,password)){
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
 
 
 }
