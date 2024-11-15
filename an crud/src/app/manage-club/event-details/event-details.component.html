@@ -1,0 +1,125 @@
+<div class="container mt-5"  *ngIf="event">
+    <div class="row">
+      <div class="col-12 col-md-8 mx-auto">
+        <div class="card shadow-lg border-0 rounded-3">
+          <div class="card-header bg-primary text-white">
+            <h4 class="card-title text-center">Event Details</h4>
+          </div>
+  
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5><strong>Event Code:</strong> {{ event.eventCode }}</h5>
+                <h6><strong>Type:</strong> {{ event.type }}</h6>
+              </div>
+              <div>
+                <span *ngIf="event.impactLevel" class="badge"
+                      [ngClass]="{
+                        'bg-success': event.impactLevel === 'Faible',
+                        'bg-warning': event.impactLevel === 'Moyen',
+                        'bg-danger': event.impactLevel === 'Élevé'
+                      }">
+                  {{ event.impactLevel }}
+                </span>
+              </div>
+            </div>
+  
+            <div class="mt-4">
+              <p><strong>Description:</strong></p>
+              <p>{{ event.description }}</p>
+            </div>
+  
+            <div class="mt-4">
+              <p><strong>Status:</strong> {{ event.status }}</p>
+              <p><strong>Location:</strong> {{ event.location }}</p>
+              <p><strong>Timestamp:</strong> {{ event.timestamp | date:'short' }}</p>
+            </div>
+  
+            <div class="mt-4">
+              <p><strong>Chauffeur ID:</strong> {{ event.chauffeurId }}</p>
+              <p><strong>Order Transport ID:</strong> {{ event.orderTransportId }}</p>
+            </div>
+  
+            <div class="mt-4">
+              <p><strong>Created At:</strong> {{ event.createdAt | date:'short' }}</p>
+              <p><strong>Updated At:</strong> {{ event.updatedAt | date:'short' }}</p>
+            </div>
+  
+            <div class="mt-4">
+              <button *ngIf="event.status=='En Cours'" class="btn btn-secondary" (click)="openAddEventModal()">Modifier</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div *ngIf="event" class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showEventModal}" [ngStyle]="{'display': showEventModal ? 'block' : 'none'}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Événement</h5>
+                <button type="button" class="btn-close" aria-label="Close" (click)="closeAddEventModal()"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                   
+
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                               <select id="type" class="form-select" [(ngModel)]="event.type" name="type" required>
+                                <option value="" disabled selected>Sélectionner le Type</option>
+                                <option value="Type 1">Type 1</option>
+                                <option value="Type 2">Type 2</option>
+                                <option value="Type 3">Type 3</option>
+                            </select>
+                        <div *ngIf="!event.type && submit" class="text-danger">Le type est requis.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" class="form-control" placeholder="Description de l'événement"
+                                  [(ngModel)]="event.description" name="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="timestamp" class="form-label">Date et Heure</label>
+                        <input type="datetime-local" id="timestamp" class="form-control" 
+                               [(ngModel)]="event.timestamp" name="timestamp" required>
+                        <div *ngIf="!event.timestamp && submit" class="text-danger">La date et l'heure sont requises.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="orderTransportId" class="form-label">ID de la Commande de Transport</label>
+                        <input type="number" id="orderTransportId" class="form-control" placeholder="ID de la commande de transport"
+                               [(ngModel)]="event.orderTransportId" name="orderTransportId">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Emplacement</label>
+                        <input type="text" id="location" class="form-control" placeholder="Emplacement de l'événement"
+                               [(ngModel)]="event.location" name="location" required>
+                        <div *ngIf="!event.location && submit" class="text-danger">L'emplacement est requis.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="impactLevel" class="form-label">Niveau d'Impact</label>
+                        <select id="impactLevel" class="form-select" [(ngModel)]="event.impactLevel" name="impactLevel" required>
+                            <option value="" disabled selected>Sélectionner le niveau d'impact</option>
+                            <option value="Faible">Faible</option>
+                            <option value="Moyen">Moyen</option>
+                            <option value="Élevé">Élevé</option>
+                        </select>
+                        <div *ngIf="!event.impactLevel && submit" class="text-danger">Le niveau d'impact est requis.</div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="modifierEvent()">Modifier</button>
+                <button type="button" class="btn btn-secondary" (click)="closeAddEventModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

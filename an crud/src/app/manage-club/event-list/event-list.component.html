@@ -1,0 +1,601 @@
+<main>
+ 
+    <section class="course__area pt-120 pb-120">
+        
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-xxl-8 col-xl-8 col-lg-8">
+            <div
+              class="course__tab-inner grey-bg-2 mb-50 d-sm-flex justify-content-between align-items-center"
+            >
+              <div class="course__tab-wrapper d-flex align-items-center">
+                <div class="course__tab-btn">
+                  <ul class="nav nav-tabs" id="courseTab" role="tablist">
+                   
+                  </ul>
+                </div>
+                <div class="course__view">
+                 <h3>Liste des Events</h3>
+                </div>
+              </div>
+              <div class="course__sort d-flex justify-content-sm-end">
+                <div class="course__sort-inner">
+                    <select [(ngModel)]="selectedStatus" (change)="getByStatus()">
+                        <option value="">Default</option>
+                        <option value="En Cours">En Cours</option>
+                        <option value="Traité">Traité</option>
+                        <option value="Refusé">Refusé</option>
+                    </select>
+                </div>
+                <a  class="btn " (click)="openAddEventModal()" style="background-color:#ff7244;"><h5 style="color:white">Ajouter</h5></a>
+              </div>
+              
+            </div>
+            <div class="course__tab-conent">
+              <div class="tab-content" id="courseTabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="grid"
+                  role="tabpanel"
+                  aria-labelledby="grid-tab"
+                >
+                </div>
+                
+                <br>
+                <div>
+                
+                  <div *ngFor="let event of events" class="row">
+                    <div class="col-xxl-12">
+                      <div class="course__item white-bg mb-30 fix">
+                        <div class="row gx-0">
+                          <div class="col-xxl-4 col-xl-4 col-lg-4">
+                            <div
+                              class="course__thumb course__thumb-list w-img p-relative fix"
+                            >
+                              <a [routerLink]="['/events/event-details', event.id]">
+                                <img
+                                  src="../../../../assets/front/img/course/list/course-1.jpg"
+                                  alt=""
+                                />
+                              </a>
+                              <div class="course__tag">
+                                <a style="color: white;" [ngStyle]="{
+                                    'background-color': event.impactLevel === 'Faible' ? '#28a745' :
+                                                        event.impactLevel === 'Moyen' ? '#ffc107' :
+                                                        event.impactLevel === 'Élevé' ? '#dc3545' : ''
+                                }" >{{ event.impactLevel }}</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xxl-8 col-xl-8 col-lg-8">
+                            <div class="course__right">
+                              <div class="course__content course__content-4">
+                                <div
+                                  class="course__meta d-flex align-items-center"
+                                >
+                                  <div class="course__lesson mr-20">
+                                    <span
+                                      ><i class="far fa-book-alt"></i>{{event.type}}</span
+                                    >
+                                    
+                                  </div>
+                                 
+                                </div>
+                                <h3 class="course__title">
+                                  <a [routerLink]="['/events/event-details', event.id]"
+                                    >{{event.eventCode}}</a
+                                  >
+                                </h3>
+                                <div
+                                  class="course__teacher d-flex align-items-center"
+                                >
+                                 
+                                  <h6>
+                                    <span>{{ event.description | slice:0:50 }}...</span>
+                                  </h6>
+                                 
+                                </div>
+                                <p>orderTransportId : {{event.orderTransportId}}<br>
+                                    Location : {{event.location}}<br>
+                                    Date creation : {{event.createdAt}}<br>
+                                    Date Modification : {{event.updatedAt}}
+                                </p> 
+                              </div>
+                              <div
+                                class="course__more course__more-2 course__more-3 d-flex justify-content-between align-items-center"
+                              >
+                                <div class="course__status">
+                                    <span [ngStyle]="{
+                                        'color': event.status === 'En Cours' ? '#ff9800' :
+                                                 event.status === 'Refusé' ? '#f44336' :
+                                                 event.status === 'Traité' ? '#4caf50' : ''
+                                      }">
+                                      {{ event.status }}
+                                    </span>
+                                </div>
+                                <button *ngIf="event.status=='En Cours'" (click)="opendeleteEventModal(event)" class="btn btn-danger">
+                                    Supprimer
+                                  </button> 
+                                <div class="course__btn">
+                                   
+                                  <a [routerLink]="['/events/event-details', event.id]" class="link-btn">
+                                    Details
+                                    <i class="far fa-arrow-right"></i>
+                                    <i class="far fa-arrow-right"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xxl-12">
+                  <div
+                    class="basic-pagination wow fadeInUp mt-30"
+                    data-wow-delay=".2s"
+                  >
+                    <ul class="d-flex align-items-center">
+                        <li class="prev" >
+                            <a [ngClass]="{ disabled: currentPage === 0 }" (click)="prevPage()" class="link-btn link-prev">
+                              Prev
+                              <i class="arrow_left"></i>
+                              <i class="arrow_left"></i>
+                            </a>
+                          </li>
+                    
+                          <!-- Page Numbers -->
+                          <li *ngFor="let page of [].constructor(totalPages); let i = index" 
+                              [ngClass]="{ 'active': i === currentPage }">
+                            <a (click)="goToPage(i)">
+                              <span>{{ i + 1 }}</span>
+                            </a>
+                          </li>
+                    
+                          <!-- Next Button -->
+                          <li class="next" >
+                            <a [ngClass]="{ disabled: currentPage === totalPages - 1 }" (click)="nextPage()" class="link-btn">
+                              Next
+                              <i class="arrow_right"></i>
+                              <i class="arrow_right"></i>
+                            </a>
+                          </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-4 col-xl-4 col-lg-4">
+            <div class="course__sidebar pl-70">
+              <div class="course__sidebar-search mb-50">
+               
+                  <input  [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange(searchQuery)"  type="text" placeholder="Search for courses..." />
+                
+                
+              </div>
+              <div class="course__sidebar-widget grey-bg">
+                <div class="course__sidebar-info">
+                  <h3 class="course__sidebar-title">Categories</h3>
+                  <ul>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                        *ngFor="let element of dataSource.data"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-eng"
+                         
+                        />
+                        <label class="m-check-label" for="m-eng"> </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="course__sidebar-widget grey-bg">
+                <div class="course__sidebar-info">
+                  <h3 class="course__sidebar-title">Language</h3>
+                  <ul>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input class="m-check-input" type="checkbox" id="m-all" />
+                        <label class="m-check-label" for="m-all"
+                          >All Language</label
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-eng-2"
+                        />
+                        <label class="m-check-label" for="m-eng-2">English</label>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-russ"
+                        />
+                        <label class="m-check-label" for="m-russ">Russian</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="course__sidebar-widget grey-bg">
+                <div class="course__sidebar-info">
+                  <h3 class="course__sidebar-title">Price Filter</h3>
+                  <ul>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-all-course"
+                        />
+                        <label class="m-check-label" for="m-all-course"
+                          >All (204)</label
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-free"
+                        />
+                        <label class="m-check-label" for="m-free"
+                          >Free Courses (36)</label
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-premium"
+                        />
+                        <label class="m-check-label" for="m-premium"
+                          >Premium Courses (184)</label
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="course__sidebar-widget grey-bg">
+                <div class="course__sidebar-info">
+                  <h3 class="course__sidebar-title">Skill level</h3>
+                  <ul>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-level"
+                        />
+                        <label class="m-check-label" for="m-level"
+                          >All Levels (50)</label
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-beginner"
+                        />
+                        <label class="m-check-label" for="m-beginner"
+                          >Beginner (32)</label
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-intermediate"
+                        />
+                        <label class="m-check-label" for="m-intermediate"
+                          >Intermediate (17)</label
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="course__sidebar-check mb-10 d-flex align-items-center"
+                      >
+                        <input
+                          class="m-check-input"
+                          type="checkbox"
+                          id="m-expert"
+                        />
+                        <label class="m-check-label" for="m-expert"
+                          >Expert (2)</label
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="course__sidebar-widget grey-bg">
+                <div class="course__sidebar-course">
+                  <h3 class="course__sidebar-title">Related courses</h3>
+                  <ul>
+                    <li>
+                      <div class="course__sm d-flex align-items-center mb-30">
+                        <div class="course__sm-thumb mr-20">
+                          <a href="#">
+                            <img
+                              src="../../../../assets/front/img/course/sm/course-sm-1.jpg"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                        <div class="course__sm-content">
+                          <div class="course__sm-rating">
+                            <ul>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <h5><a href="course-details.html">Development</a></h5>
+                          <div class="course__sm-price">
+                            <span>$54.00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="course__sm d-flex align-items-center mb-30">
+                        <div class="course__sm-thumb mr-20">
+                          <a href="#">
+                            <img
+                              src="../../../../assets/front/img/course/sm/course-sm-2.jpg"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                        <div class="course__sm-content">
+                          <div class="course__sm-rating">
+                            <ul>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <h5><a href="course-details.html">Data Science</a></h5>
+                          <div class="course__sm-price">
+                            <span>$72.00</span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="course__sm d-flex align-items-center mb-10">
+                        <div class="course__sm-thumb mr-20">
+                          <a href="#">
+                            <img
+                              src="../../../../assets/front/img/course/sm/course-sm-3.jpg"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                        <div class="course__sm-content">
+                          <div class="course__sm-rating">
+                            <ul>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                              <li>
+                                <a href="#"> <i class="icon_star"></i> </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <h5><a href="course-details.html">UX Design</a></h5>
+                          <div class="course__sm-price">
+                            <span>Free</span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- course area end -->
+  
+    <!-- cta area start -->
+    <section class="cta__area mb--120">
+      <div class="container">
+        <div class="cta__inner blue-bg fix">
+          <div class="cta__shape">
+            <img src="../../../../assets/front/img/cta/cta-shape.png" alt="" />
+          </div>
+          <div class="row align-items-center">
+            <div class="col-xxl-7 col-xl-7 col-lg-8 col-md-8">
+              <div class="cta__content">
+                <h3 class="cta__title">
+                  You can be your own Guiding star with our help
+                </h3>
+              </div>
+            </div>
+            <div class="col-xxl-5 col-xl-5 col-lg-4 col-md-4">
+              <div
+                class="cta__more d-md-flex justify-content-end p-relative z-index-1"
+              >
+                <a href="#" class="e-btn e-btn-white">Get Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- cta area end -->
+  </main>
+  
+
+  <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showEventModal}" [ngStyle]="{'display': showEventModal ? 'block' : 'none'}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Événement</h5>
+                <button type="button" class="btn-close" aria-label="Close" (click)="closeAddEventModal()"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                               <select id="type" class="form-select" [(ngModel)]="newEvent.type" name="type" required>
+                                <option value="" disabled selected>Sélectionner le Type</option>
+                                <option value="Type 1">Type 1</option>
+                                <option value="Type 2">Type 2</option>
+                                <option value="Type 3">Type 3</option>
+                            </select>
+                        <div *ngIf="!newEvent.type && submit" class="text-danger">Le type est requis.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" class="form-control" placeholder="Description de l'événement"
+                                  [(ngModel)]="newEvent.description" name="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="timestamp" class="form-label">Date et Heure</label>
+                        <input type="datetime-local" id="timestamp" class="form-control" 
+                               [(ngModel)]="newEvent.timestamp" name="timestamp" required>
+                        <div *ngIf="!newEvent.timestamp && submit" class="text-danger">La date et l'heure sont requises.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="orderTransportId" class="form-label">ID de la Commande de Transport</label>
+                        
+                        <select id="orderTransportId" class="form-control" [(ngModel)]="newEvent.orderTransportId" name="orderTransportId">
+                          <option [value]=0 disabled selected>Sélectionner un Order de Transport</option>
+                          <option *ngFor="let order of orders" [value]="order.id">
+                            {{ order.id }} - {{ order.nomClient }}
+                          </option>
+                        </select>
+                        
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Emplacement</label>
+                        <input type="text" id="location" class="form-control" placeholder="Emplacement de l'événement"
+                               [(ngModel)]="newEvent.location" name="location" required>
+                        <div *ngIf="!newEvent.location && submit" class="text-danger">L'emplacement est requis.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="impactLevel" class="form-label">Niveau d'Impact</label>
+                        <select id="impactLevel" class="form-select" [(ngModel)]="newEvent.impactLevel" name="impactLevel" required>
+                            <option value="" disabled selected>Sélectionner le niveau d'impact</option>
+                            <option value="Faible">Faible</option>
+                            <option value="Moyen">Moyen</option>
+                            <option value="Élevé">Élevé</option>
+                        </select>
+                        <div *ngIf="!newEvent.impactLevel && submit" class="text-danger">Le niveau d'impact est requis.</div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="addEvent()">Ajouter</button>
+                <button type="button" class="btn btn-secondary" (click)="closeAddEventModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showdeleteEventModal}" [ngStyle]="{'display': showdeleteEventModal ? 'block' : 'none'}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title">Vous Volez vraiment supprimer l'Événement </h5>
+                <button type="button" class="btn-close" aria-label="Close" (click)="closedeleteEventModal()"></button>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="deleteEvent()">Supprimer</button>
+                <button type="button" class="btn btn-secondary" (click)="closedeleteEventModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,9 @@ import { ErrorFormHandlerComponent } from './error-form-handler/error-form-handl
 import { ClubDetailDashComponent } from './club-detail-dash/club-detail-dash.component';
 
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
+import { EventListDashboardComponent } from './event-list-dashboard/event-list-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
     ErrorFormHandlerComponent,
     ClubDetailDashComponent,
     ChatbotComponent,
+    EventListComponent,
+    EventDetailsComponent,
+    EventListDashboardComponent,
   ],
   imports: [
     CommonModule,
