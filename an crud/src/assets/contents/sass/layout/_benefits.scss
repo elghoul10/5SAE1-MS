@@ -1,0 +1,48 @@
+.benefits{
+
+    &__container{
+        display: flex;
+        align-items: center;
+    }
+
+    &__shape{
+        position: relative;
+
+        &__img{
+            width: 100%;
+        }
+
+        &__txt{
+            position: absolute;
+            top: 34%;
+            left: 10%;
+            max-width: 55rem;
+            
+            &__title{
+                color: $dark-font-color;
+                font-size: 4rem;
+                font-weight: 800;
+                span{
+                    color: $secondary;
+                }
+            }
+
+            &__parag{
+                color: $dark-font-color;
+                font-size: 2rem;
+                margin-top: 2rem;
+            }
+
+            &__btn{
+                margin: 4rem auto;
+            }
+        }
+    }
+
+    &__ill{
+        margin-left: -30rem;
+        &__lottie-player{
+            width: 70rem;
+        }
+    }
+}

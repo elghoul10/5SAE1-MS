@@ -1,0 +1,21 @@
+<div>
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Entrez votre recherche"
+  />
+  <button (click)="searchVideo()">Rechercher</button>
+</div>
+
+<div *ngIf="videoDetails">
+  <h2>{{ videoDetails.snippet.title }}</h2>
+  <p>Date de publication : {{ videoDetails.snippet.publishedAt }}</p>
+
+  <iframe
+    width="560"
+    height="315"
+    [src]="videoUrl"
+    frameborder="0"
+    allowfullscreen
+  ></iframe>
+</div>

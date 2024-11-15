@@ -1,0 +1,115 @@
+<div class="acceder_cours">
+  <div class="video_affichee" *ngIf="currentLesson">
+    <video
+      class="video_affichee-v1"
+      [src]="
+        'http://localhost:8081/api/upload-directory/' +
+        currentLesson.imageLesson
+      "
+      controls
+    ></video>
+  </div>
+
+  <div class="liste_cours_achete">
+    <a href="./logIn.html" class="course-detail__buy__btn">
+      Buy this course
+      <img
+        src="../../../assets/contents/img/cart-icon.png"
+        alt=""
+        class="course-detail__buy__btn-icon"
+      />
+    </a>
+
+    <div class="course-detail__buy__option__container">
+      <div class="course-detail__buy__option__item">
+        <span
+          class="course-detail__buy__option__item__icon"
+          style="color: #636361"
+          ><i class="far fa-file-certificate fa-2x"></i
+        ></span>
+        <p class="course-detail__buy__option__item__title">
+          Shareable Certificate
+        </p>
+      </div>
+
+      <div class="course-detail__buy__option__item">
+        <span
+          class="course-detail__buy__option__item__icon"
+          style="color: #636361"
+          ><i class="fal fa-globe fa-2x"></i
+        ></span>
+        <p class="course-detail__buy__option__item__title">
+          100% online courses
+        </p>
+      </div>
+
+      <div class="course-detail__buy__option__item">
+        <img
+          src="../../../assets/contents/img/video-icon-2.png"
+          alt=""
+          class="course-detail__buy__option__item__icon"
+        />
+        <p class="course-detail__buy__option__item__title">count_lessons</p>
+      </div>
+
+      <div class="course-detail__buy__option__item">
+        <img
+          src="../../../assets/contents/img/chapter-icon.png"
+          alt=""
+          class="course-detail__buy__option__item__icon"
+        />
+        <p class="course-detail__buy__option__item__title">count_chapters</p>
+      </div>
+
+      <div class="course-detail__buy__option__item">
+        <img
+          src="../../../assets/contents/img/infinity-icon.png"
+          alt=""
+          class="course-detail__buy__option__item__icon"
+        />
+        <p class="course-detail__buy__option__item__title">
+          Full lifetime access
+        </p>
+      </div>
+
+      <div class="course-detail__buy__option__item">
+        <img
+          src="../../../assets/contents/img/level-icon.png"
+          alt=""
+          class="course-detail__buy__option__item__icon"
+        />
+        <p class="course-detail__buy__option__item__title">
+          Level: <span>level</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <p>Share your review:</p>
+  <textarea
+    id="review"
+    placeholder="Write your review here"
+    [(ngModel)]="ratingValue"
+  ></textarea>
+  <button id="submit" (click)="submitRating()">Comments</button>
+
+  <div class="reviews" id="reviews" *ngFor="let review of reviewsList">
+    <img
+      src="../../../assets/contents/img/level-icon.png"
+      alt=""
+      class="course-detail__buy__option__item__icon"
+    />
+    Full Name :
+    <h1>Comments:</h1>
+    <ul>
+      <h3>{{ review.ratingValue }}</h3>
+    </ul>
+    <li class="course-detail__buy__option__item__title1">
+      Sentence: <span>{{ review.sentence }}</span>
+    </li>
+  </div>
+</div>
+
+<app-chatboot></app-chatboot>

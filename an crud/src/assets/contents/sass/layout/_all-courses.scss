@@ -1,0 +1,86 @@
+.all-courses{
+    &__title{
+        margin: 3rem;
+        margin-bottom: 0;
+        font-size: 4rem;
+        color: $primary-light;
+
+    }
+
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10rem;
+    }
+
+    &__categorie{
+
+        &__title{
+            position: relative;
+            margin-bottom: 0;
+            font-size: 2.5rem;
+            color: $primary-light;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            
+            &::after{
+                position: absolute;
+                top: 110%;
+                left: 50%;
+                transform: translateX(-50%);
+                content: "";
+                display: block;
+                width: 15rem;
+                height: .2rem;
+                background-color: $secondary;
+                opacity: 0.2;
+                border-radius: 50rem;
+            }
+        }
+        &__container{
+            height: 55rem;
+            width: 45rem;
+            position: sticky;
+            top: 10rem;
+            background-color: $body-bg-color;
+            border-radius: 2.5rem;
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.07);
+            padding: 1rem;
+        }
+        &__list{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        &__item{
+            text-decoration: none;
+            display: inline-block;
+            color: $primary-light;
+            transition: all .2s;
+            margin-bottom: .8rem;
+
+            &:hover{
+                color: $secondary;
+            }
+
+            &-active{
+                color: $secondary;
+            }
+        }
+    }
+} 
+
+.courses__card-v3__container{
+    display: grid;
+    
+    grid-column: center-start / center-end;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    row-gap: 4rem;
+    column-gap: 2rem;
+}
+
+
+
+.all-course-body{
+    background-color: #F5F1F6;
+}

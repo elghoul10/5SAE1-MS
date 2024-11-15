@@ -1,0 +1,43 @@
+@import "abstract/variables";
+
+
+@import "base/animations";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+
+
+@import "components/buttons";
+@import "components/course-card";
+@import "components/course";
+@import "components/input";
+@import "components/modal";
+@import "components/stat-box";
+@import "components/testimonial-card";
+
+
+
+@import "layout/all-courses";
+@import "layout/benefits";
+@import "layout/cart";
+@import "layout/course-detail";
+@import "layout/courses";
+@import "layout/dash-side-bar";
+@import "layout/dash-top-bar";
+@import "layout/footer";
+@import "layout/form-signUp-login";
+@import "layout/header";
+@import "layout/navigation";
+@import "layout/offres";
+@import "layout/profile";
+@import "layout/testimonial";
+@import "layout/update-profile";
+@import "layout/users-list";
+
+
+
+
+@import "page/dashboard";
+@import "page/instructor-dash-home";
+@import "page/landing-page";

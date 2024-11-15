@@ -1,0 +1,206 @@
+.course-detail{
+
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 9rem;
+        padding-right: 1.5rem;
+    }
+
+    &__divider{
+        width: 3rem;
+    }
+
+    &__content{
+        padding: 1rem;
+        padding-left: 3rem;
+        height: 190rem;
+        flex: 2.5;
+
+        &__title{
+            font-size: 3.5rem;
+            color: $dark-font-color-2;
+            max-width: 70rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        &__owner{
+            color: $dark-font-color;
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            &__name{
+                font-size: 1.9rem;
+                margin-right: 10rem;
+                span{
+                    color: $secondary;
+                }
+            }
+
+            &__category{
+                display: inline-block;
+                font-size: 1.8rem;
+                color: white;
+                padding: .9rem 2rem;
+                border-radius: 50rem;
+                background-color: $primary-light;
+                font-weight: 500;
+            }
+        }
+
+        &__cover{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 7rem;
+            &__container{
+                width: 65rem;
+                height: 35rem;
+                border-radius: 7rem;
+                margin-bottom: 4rem;
+            }
+        }
+
+        &__description{
+
+            &__title{
+                font-size: 3rem;
+                color: $dark-font-color-2;
+                margin-bottom: 1.5rem;
+            }
+            &__parag{
+                color: $dark-font-color;
+                font-size: 1.9rem;
+                font-weight: 500;
+                max-width: 95rem;
+                margin-bottom: 5rem;
+            }
+        }
+
+        &__chapters{
+            padding: 2.5rem;
+            border-radius: 3.5rem;
+            background-color: white;
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.07);
+            margin-bottom: 3.5rem;
+
+            &__title{
+                display: inline-block;
+                position: relative;
+                color: $dark-font-color-2;
+                margin-bottom: 4rem;
+                margin-left: 1.7rem;
+
+                &::after{
+                    content: "";
+                    position: absolute;
+                    bottom: -30%;
+                    // top: 100%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: $secondary;
+                    width: 80%;
+                    height: 0.2rem;
+                    opacity: 0.5;
+                    border-radius: 50rem;
+                }
+
+            }
+
+            &__container{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                grid-row: auto auto;
+                grid-column-gap: 2rem;
+                grid-row-gap: 2.5rem;
+            }
+
+            &__item{
+                display: flex;
+                align-items: center;
+                &__icon{
+                    width: 2.5rem;
+                    margin-right: 1.5rem;
+                }
+
+                &__title{
+                    color: $dark-font-color;
+                }
+            }
+        }
+    }
+
+
+    &__buy{
+        position: sticky;
+        top: 10rem;
+        height: 50rem;
+        background-color: white;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.05);
+        border-radius: 3rem;
+        flex: 1;
+        padding: 2rem;
+
+        &__price{
+            margin-left: 3rem;
+            color: $secondary;
+            font-size: 6rem;
+            font-weight: 600;
+            span{
+                font-size: 2rem;
+            }
+        }
+
+        &__btn{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            background-color: rgba(255, 115, 68, 0.8);
+            transition: all 0.2s;
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.04);
+            border-radius: 1.5rem;
+            padding: 1rem 2rem;
+            max-width: 25rem;
+            margin: 2rem auto 5rem auto;
+
+            &-icon{
+                width: 3rem;
+            }
+
+
+            &:hover{
+                background-color: $secondary;
+            }
+        }
+        
+        &__option{
+            
+            &__container{
+                padding: 2rem;
+            }
+
+            &__item{
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                &__icon{
+                    width: 2.9rem;
+                    margin-right: 1rem;
+                }
+                &__title{
+                    color: $dark-font-color;
+
+                    span{
+                        color: white;
+                        padding: .7rem 2rem;
+                        background-color: $primary-light;
+                        border-radius: 50rem;
+                    }
+                }
+            }
+        }
+    }
+}

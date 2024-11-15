@@ -1,0 +1,32 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+}
+
+body{
+    background-color: $body-bg-color;
+    overflow-x: hidden !important;
+}
+
+::-webkit-scrollbar{
+    width: 1rem;
+    border-radius: 5rem;
+  }
+  
+  ::-webkit-scrollbar-track{
+    background-color: #D6DBFD;
+    border-radius: 5rem;
+  }
+  
+  ::-webkit-scrollbar-thumb{
+    background-color: #4A5BCF;
+    border-radius: 5rem;
+  }

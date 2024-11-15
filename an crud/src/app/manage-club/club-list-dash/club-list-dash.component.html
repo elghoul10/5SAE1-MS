@@ -1,0 +1,227 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-sm-4">
+        <!-- <mat-card-title>Users list</mat-card-title> -->
+        <div class="contact__form-input" style="display: flex">
+          <input
+            style="background-color: transparent"
+            type="text"
+            placeholder="Search"
+            id="search"
+            name="search"
+            [(ngModel)]="searchInput"
+            (input)="onSearchChange(searchInput)"
+          />
+
+          <i-tabler
+            style="margin: 1.5rem 0 0 -2.2rem; color: #cacaca"
+            class="routeIcon"
+            name="search"
+            matListItemIcon
+          ></i-tabler>
+        </div>
+      </div>
+      <div class="col-sm-8 text-right">
+        <!-- <mat-card-subtitle class="mat-body-1"></mat-card-subtitle> -->
+        <!-- <button mat-flat-button color="primary" (click)="openAddUserDialog()">
+          Add user (click)="openAddUserDialog()"
+        </button> -->
+
+        <button
+          type="button"
+          mat-flat-button
+          class="Extended-Fab"
+          (click)="openAddClubDialog()"
+        >
+          <span class="Extended-Fab__container">
+            <i-tabler
+              class="routeIcon Extended-Fab__icon"
+              name="circle-plus"
+              matListItemIcon
+            ></i-tabler>
+            <span class="Extended-Fab__text">Add Course</span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <app-chatbot></app-chatbot>
+  </mat-card-content>
+</mat-card>
+<div class="course__card-v2" *ngFor="let element of dataSource.data">
+  <div class="course__card-v2__img-container">
+    <img
+      [src]="'http://localhost:8083/upload-directory/' + element.imageUrl"
+      alt=""
+      class="course__card-v2__img"
+    />
+  </div>
+
+  <div class="course__card-v2__content">
+    <div style="display: flex">
+      <h1 class="course__card-v2__title2">{{ element.nom }}</h1>
+    </div>
+    <div style="display: flex">
+      <p style="margin-right: auto" class="course__card-v2__title2__instructor">
+        <span>Created By</span>
+        {{
+          element.description.length > 25
+            ? element.description.substring(0, 25) + "..."
+            : element.description
+        }}
+      </p>
+
+      <span style="color: #585856"> جنيه ليبي {{ element.id }}</span>
+
+      <span
+        style="
+          color: #ff7244;
+          margin-right: 2rem;
+          text-decoration: line-through;
+        "
+      >
+      </span>
+      <span style="color: #34be82">$100</span>
+    </div>
+    <div class="course__card-v2__cate-action">
+      <div class="course__card-v2__category"></div>
+
+      <span class="state_course_accepted">accepted</span>
+
+      <div class="course__card-v2__action-btns">
+        <a
+          [routerLink]="['/dashboard/clubs/detail', element.id]"
+          class="course__card-v2__btn course__card-v2__btn-view"
+        >
+          <svg
+            class="course__card-v2__btn-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 31.995 21"
+          >
+            <g id="see-icon" transform="translate(-0.002 -5.5)">
+              <path
+                id="Path_1047"
+                data-name="Path 1047"
+                d="M16,5.5A17.674,17.674,0,0,0,.1,15.55a1.11,1.11,0,0,0,0,.91,17.61,17.61,0,0,0,31.8,0,1.11,1.11,0,0,0,0-.91A17.674,17.674,0,0,0,16,5.5Zm0,16.84A6.34,6.34,0,1,1,22.34,16,6.355,6.355,0,0,1,16,22.34Z"
+                fill="#fff"
+              />
+              <circle
+                id="Ellipse_34"
+                data-name="Ellipse 34"
+                cx="4.2"
+                cy="4.2"
+                r="4.2"
+                transform="translate(11.8 11.8)"
+                fill="#fff"
+              />
+            </g>
+          </svg>
+        </a>
+
+        <div id="" class="modal-window">
+          <div>
+            <a href="#" title="Close" class="modal-close">Close</a>
+
+            <form style="display: inline-block" action="" method="POST">
+              <input type="hidden" value="" name="formation_id" />
+              <input type="hidden" value="" name="user_id" />
+              <input type="hidden" value="" name="formation_price" />
+
+              <div style="margin-top: 2rem" class="form__input__group">
+                <label for="reduction" class="form__input__label"
+                  >Reduction(%)</label
+                >
+                <input
+                  type="number"
+                  style="padding: 1rem 2rem; height: auto"
+                  class="form__input"
+                  name="reduction"
+                  id="reduction"
+                  placeholder="Reduction %"
+                />
+              </div>
+
+              <input
+                style="max-width: 20rem; margin-bottom: 4rem"
+                class="primary-btn primary-btn-form"
+                type="submit"
+                value="Submit offer"
+              />
+            </form>
+          </div>
+        </div>
+
+        <a
+          (click)="openUpdateDialog(element.id)"
+          class="course__card-v2__btn course__card-v2__btn-update"
+        >
+          <svg
+            class="course__card-v2__btn-icon course__card-v2__btn-icon-update"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 35.816 35.972"
+          >
+            <g id="update-icon" transform="translate(-0.757)">
+              <g
+                id="Group_34"
+                data-name="Group 34"
+                transform="translate(0.757)"
+              >
+                <path
+                  id="Path_1056"
+                  data-name="Path 1056"
+                  d="M119.026,1.212l-.043-.039a4.482,4.482,0,0,0-6.332.286L96.633,19a1.546,1.546,0,0,0-.325.554L94.424,25.2a2.147,2.147,0,0,0,2.033,2.827h0a2.139,2.139,0,0,0,.862-.181l5.453-2.386a1.545,1.545,0,0,0,.522-.374L119.313,7.545A4.487,4.487,0,0,0,119.026,1.212ZM98.033,24.152l1.105-3.313.093-.1,2.095,1.913-.093.1Zm19-18.694L103.412,20.366l-2.095-1.913L114.934,3.545a1.389,1.389,0,0,1,1.963-.088l.043.039A1.39,1.39,0,0,1,117.029,5.459Z"
+                  transform="translate(-84.668)"
+                  fill="#fff"
+                />
+                <path
+                  id="Path_1057"
+                  data-name="Path 1057"
+                  d="M32.008,43.208a1.547,1.547,0,0,0-1.547,1.547v13.13a3.938,3.938,0,0,1-3.933,3.933H7.783A3.938,3.938,0,0,1,3.85,57.885V39.292a3.938,3.938,0,0,1,3.933-3.933H21.351a1.547,1.547,0,1,0,0-3.093H7.783A7.034,7.034,0,0,0,.757,39.292V57.885a7.034,7.034,0,0,0,7.026,7.026H26.528a7.034,7.034,0,0,0,7.026-7.026V44.754A1.546,1.546,0,0,0,32.008,43.208Z"
+                  transform="translate(-0.757 -28.939)"
+                  fill="#fff"
+                />
+              </g>
+            </g>
+          </svg>
+        </a>
+
+        <a
+          (click)="onDeleteClub(element.id)"
+          class="course__card-v2__btn course__card-v2__btn-delete"
+        >
+          <svg
+            class="course__card-v2__btn-icon course__card-v2__btn-icon-delete"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 27.884 34.856"
+          >
+            <g id="delete-icon" transform="translate(-9 -4.998)">
+              <g id="Icons" transform="translate(9 4.998)">
+                <path
+                  id="Path_1060"
+                  data-name="Path 1060"
+                  d="M36.884,10.228h-6.1V8.267A3.381,3.381,0,0,0,27.3,5H18.585A3.381,3.381,0,0,0,15.1,8.267v1.961H9v1.743h1.743V33.755a6.1,6.1,0,0,0,6.1,6.1h12.2a6.1,6.1,0,0,0,6.1-6.1V11.971h1.743ZM16.842,8.267a1.647,1.647,0,0,1,1.743-1.525H27.3a1.647,1.647,0,0,1,1.743,1.525v1.961h-12.2ZM33.4,33.755a4.357,4.357,0,0,1-4.357,4.357h-12.2a4.357,4.357,0,0,1-4.357-4.357V11.971H33.4Z"
+                  transform="translate(-9 -4.998)"
+                  fill="#fff"
+                />
+                <path
+                  id="Path_1061"
+                  data-name="Path 1061"
+                  d="M19,19h1.743V34.685H19Z"
+                  transform="translate(-10.286 -6.799)"
+                  fill="#fff"
+                />
+                <path
+                  id="Path_1062"
+                  data-name="Path 1062"
+                  d="M29,19h1.743V34.685H29Z"
+                  transform="translate(-11.573 -6.799)"
+                  fill="#fff"
+                />
+              </g>
+            </g>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+.courses{
+    position: relative;
+    width: 100%;
+    overflow: hidden !important;
+    
+    &__shape1{
+        width: 100%;
+        height: 12rem;
+        background-color: $primary-light;
+        border-bottom-right-radius: 50rem;
+        border-bottom-left-radius: 50rem;
+    }
+
+    &__shape2{
+        position: relative;
+
+        &__img{
+            width: 100%;
+        }
+
+        &__heading{
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%,0%);
+            font-size: 3.5rem;
+        }
+    }
+
+    &__container{
+        padding: 7rem 3rem;
+        width: 100%;
+        background-color: $tertiary;
+        border: 5px solid $primary-light;
+    }   
+
+    &__card__container{
+        display: grid;
+        
+        grid-column: center-start / center-end;
+        grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+        grid-gap: 5rem;
+    }
+
+    &-btn{
+        // display: inline-block;
+        text-align: center;
+        margin-top: 6rem;
+    }
+}
+
+.featured{
+
+    &-box{
+    width: 95%;
+    margin: -5rem auto 0 auto;
+    height: 15rem;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    background-color: white;
+    box-shadow: 0 .2rem 2rem rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    }
+
+    &__item{
+        display: flex;
+        align-items: center;
+        &__icon{
+            width: 8rem;
+            margin-right: 2rem;
+        }
+        &__txt{
+            font-size: 1.9rem;
+            color: $dark-font-color;
+        }
+    }
+
+
+}
+
+.animated-elipse-3{
+    z-index: -2;
+    position: absolute;
+    top: 0;
+    right: -23%;
+    animation: elipse-animation-2 80s ease infinite;
+
+}
+
+.animated-elipse-4{
+    z-index: -2;
+    position: absolute;
+    top: -13%;
+    right: -13%;
+    animation: elipse-animation-2 80s ease infinite;
+
+}

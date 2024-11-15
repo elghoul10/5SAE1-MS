@@ -1,0 +1,83 @@
+.dash__instructor-home{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: calc(100% - 11rem); 
+    border-radius: 2rem;
+    padding: 0 1rem;
+
+    &__welcome{
+        position: relative;
+        padding: 3.5rem 2rem;
+        background-color: $primary-light;
+        border-radius: 2rem;
+        margin-bottom: 3rem;
+
+        &__txt-1{
+            color: #D6DBFD;
+        }
+
+        &__txt-2{
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            span{
+                color: $secondary;
+            }
+        }
+
+        &__txt-3{
+            color: #D6DBFD;
+        }
+
+        &__ill{
+            position: absolute;
+            top: -58%;
+            right: -2%;
+            width: 35rem;
+            height: 35rem;
+        }
+    }
+
+    &__content{
+        display: flex;
+
+        &__left-side{
+            margin-right: 2rem;
+            flex: 1;
+
+            &__latest-courses{
+
+
+                &__head{
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 2rem;
+
+                    &__title{
+                        font-size: 2.1rem;
+                        color: $dark-font-color;
+                    }
+                }
+            }
+        }
+
+        &__right-side{
+            flex: 1;
+        }
+    }
+}
+
+
+.dash__instructor-my-courses{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: calc(100% - 11rem); 
+    border-radius: 2rem;
+    padding: 0 1rem;
+
+    &__title{
+        font-size: 2.4rem;
+        color: $dark-font-color;
+
+        margin-bottom: 2.4rem;
+    }
+}

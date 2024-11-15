@@ -1,0 +1,84 @@
+.testimonial__card{
+    display: flex;
+    align-items: center;
+    padding: 4rem 1rem 4rem 4rem ;
+    width: 69rem;
+    border-radius: 5rem;
+    background-color: #fff;
+    box-shadow: 0 .8rem 2rem rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition: all 0.5s;
+
+    &__img{
+        height: 11rem;
+        width: 11rem; 
+        background-size: 180%;
+        object-fit: cover;
+        border-radius: 2.5rem;
+        transform: rotateZ(-45deg);
+
+        &-shape{
+            width: 11rem;
+            height: 11rem;
+            background-color: rgba(255, 115, 68, 0.4);
+            border-radius: 2.5rem;
+            transform: rotateZ(45deg); 
+            margin-right: 5rem;
+        }
+    }
+
+    &__txt{
+        color: $dark-font-color;
+
+        &__title{
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: black;
+
+        }
+
+        &__parag{
+            color: $dark-font-color;
+            margin-bottom: 2rem;
+        }
+
+        &__stat{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-right: 3rem;
+
+            &__user-name{
+                color: black;
+                font-weight: 800;
+            }
+
+            &__stars-container{
+                display: flex;
+                align-items: center;
+            }
+
+            &__rating{
+                margin-right: 1rem;
+            }
+
+            &__stars{
+                display: flex;
+                justify-content: center;
+            }
+            
+            &__star-icon{
+                width: 1.8rem;
+                margin-left: .5rem;
+            }
+        }
+    }
+
+    &:hover{
+        transform: perspective(1px) scale(1.02);
+        box-shadow: 0 .5rem 3rem rgba(58, 41, 41, 0.2);
+    }
+    
+}
