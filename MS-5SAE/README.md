@@ -10,6 +10,8 @@ Ce projet vise à fournir une plateforme centralisée pour la gestion des ordres
 - __Front end__ :Angular
 - __Base de donnée:__ MySql / H2 / Mongo db
 - __Technologies du micro service supplémentaire (gestion de reclamation) :__ Node JS / Mongo db
+- __Les patrons de l'architecture du projet:__ Gateway API / Serveur de configuration (**config serve**) / Serveur de registration (**Eureka**)
+- __Sécurité__: keycloak
 
 ## Nom des membres de l'équipe 
 - Manel Walha
