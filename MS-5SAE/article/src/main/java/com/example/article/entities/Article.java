@@ -20,18 +20,19 @@ import java.io.Serializable;
 public class Article implements Serializable {
 
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nomRestaurant, menu;
+    private String sujet, article;
     private String imageUrl;
     private String specialite;
 
-    public Article(String nomRestaurant, String menu, String imageUrl, String specialite) {
+    public Article(String sujet, String article, String imageUrl, String specialite) {
         super();
-        this.nomRestaurant = nomRestaurant;
-        this.menu = menu;
+        this.sujet = sujet;
+        this.article = article;
         this.imageUrl=imageUrl;
         this.specialite=specialite;
     }

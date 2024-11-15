@@ -3,9 +3,12 @@ package com.example.article.controllers;
 
 import com.example.article.QRCode.QRCodeGenerator;
 import com.example.article.entities.Article;
+import com.example.article.entities.Rating;
+import com.example.article.entities.Reaction;
 import com.example.article.repositories.ArticleRepository;
 import com.example.article.services.FileStorageService;
 import com.example.article.services.ArticleServiceImpl;
+import com.example.article.services.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -28,10 +31,17 @@ public class ArticleController {
     @Autowired
     FileStorageService fileStorageService;
 
+    private final IArticleService articleService;
+
+    @Autowired
+    public ArticleController(IArticleService articleService) {
+        this.articleService = articleService;
+    }
+
     private static final String QR_CODE_IMAGE_DIRECTORY = "./src/main/resources/static/img/";
     @PostMapping("/uploadImage/{id}")
     public Article handleImageFileUpload(@RequestParam("fileImage") MultipartFile fileImage, @PathVariable int id) {
-        return restaurantService.handleImageFileUpload(fileImage,id);
+        return articleService.handleImageFileUpload(fileImage,id);
     }
     @GetMapping("/getImage/{fileName:.+}")
     public ResponseEntity<ByteArrayResource> getImage(@PathVariable String fileName) {
@@ -46,15 +56,21 @@ public class ArticleController {
     @Autowired
     ArticleRepository articleRepository;
 
+
     @GetMapping("/qrCode/{id}")
     public ResponseEntity<ByteArrayResource> getQRCode(@PathVariable(value = "id") int id) {
         Article r = articleRepository.findById(id).orElse(null);
-        String phrase = "*** Details Restaurant " +r.getNomRestaurant()+" ***  Specialite Restaurant : "+r.getSpecialite()+
-                " Plat du jour : "+r.getMenu() ;
+
+        // Vérifiez si l'article est introuvable
+        if (r == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        String phrase = "*** Details Article " + r.getSujet() + " ***  Specialite Article : " + r.getSpecialite() +
+                " Contenu : " + r.getArticle();
         byte[] image = new byte[0];
         try {
             image = QRCodeGenerator.getQRCodeImage(phrase, 250, 250);
-
         } catch (WriterException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -71,6 +87,7 @@ public class ArticleController {
                 .contentLength(image.length)
                 .body(resource);
     }
+
 
 
 
@@ -101,45 +118,57 @@ public class ArticleController {
 
     @RequestMapping("/hello")
     public String sayHello() {
-        String title = "Hello, i'm the restaurant Micro Service";
+        String title = "Hello, i'm the Article Micro Service";
         System.out.println(title);
         return title;
     }
 
     @Autowired
-    private ArticleServiceImpl restaurantService;
+    private ArticleServiceImpl articleServiceImp;
 
     @GetMapping
     public List<Article> getListCandid() {
-        return restaurantService.getAll();
+        return articleServiceImp.getAll();
     }
 
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Article> fetchRestaurantById (@PathVariable(value = "id") int id){
-        return new ResponseEntity<>(restaurantService.getRestaurantId(id), HttpStatus.OK);
+    public ResponseEntity<Article> fetchArticleById (@PathVariable(value = "id") int id){
+        return new ResponseEntity<>(articleServiceImp.getArticleId(id), HttpStatus.OK);
 
     }
 
     @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Article> createRestaurant(@RequestBody Article article) {
-        return new ResponseEntity<>(restaurantService.addRestaurant(article), HttpStatus.OK);
+    public ResponseEntity<Article> createArticle(@RequestBody Article article) {
+        return new ResponseEntity<>(articleServiceImp.addArticle(article), HttpStatus.OK);
     }
 
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Article> updateRestaurant(@PathVariable(value = "id") int id,
+    public ResponseEntity<Article> updateArticle(@PathVariable(value = "id") int id,
                                                     @RequestBody Article article){
-        return new ResponseEntity<>(restaurantService.updateRestaurant(id, article), HttpStatus.OK);
+        return new ResponseEntity<>(articleServiceImp.updateArticle(id, article), HttpStatus.OK);
     }
 
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> deleteRestaurant(@PathVariable(value = "id") int id){
-        return new ResponseEntity<>(restaurantService.deleteRestaurant(id), HttpStatus.OK);
+    public ResponseEntity<String> deleteArticle(@PathVariable(value = "id") int id){
+        return new ResponseEntity<>(articleServiceImp.deleteArticle(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/{articleId}/rating")
+    public ResponseEntity<Rating> addRating(@PathVariable int articleId, @RequestParam int stars) {
+        Rating rating = articleServiceImp.addRating(articleId, stars);
+        return new ResponseEntity<>(rating, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{articleId}/reaction")
+    public ResponseEntity<Reaction> addReaction(@PathVariable int articleId, @RequestParam String type) {
+        Reaction reaction = articleServiceImp.addReaction(articleId, type);
+        return new ResponseEntity<>(reaction, HttpStatus.CREATED);
     }
 
 }
