@@ -1,0 +1,184 @@
+
+
+<br><br><br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+      <div class="col-xxl-12">
+        <div class="table-responsive">
+          <div class="table-controls d-flex justify-content-between align-items-center mb-3">
+            <h3>Liste des Events</h3>
+            <div class="d-flex">
+              <select class="form-select me-2" [(ngModel)]="selectedStatus" (change)="getByStatus()">
+                <option value="">Default</option>
+                <option value="En Cours">En Cours</option>
+                <option value="Traité">Traité</option>
+                <option value="Refusé">Refusé</option>
+              </select>
+              <button class="btn btn-primary" (click)="openAddEventModal()">Ajouter</button>
+            </div>
+          </div>
+  
+          <table class="table table-bordered table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>Image</th>
+                <th>Impact Level</th>
+                <th>Type</th>
+                <th>Code</th>
+                <th>Location</th>
+                <th>Order Transport ID</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let event of events">
+                <td>
+                  <a [routerLink]="['/dashboard/client/event-details/', event.id]">
+                    <img src="../../../../assets/front/img/course/list/course-1.jpg" alt="Event Image" style="width: 80px;">
+                  </a>
+                </td>
+                <td>
+                  <span [ngStyle]="{
+                      'background-color': event.impactLevel === 'Faible' ? '#28a745' :
+                                          event.impactLevel === 'Moyen' ? '#ffc107' :
+                                          event.impactLevel === 'Élevé' ? '#dc3545' : ''
+                  }" class="badge">{{ event.impactLevel }}</span>
+                </td>
+                <td>{{ event.type }}</td>
+                <td><a [routerLink]="['/events/event-details', event.id]">{{ event.eventCode }}</a></td>
+                <td>{{ event.location }}</td>
+                <td>{{ event.orderTransportId }}</td>
+                <td>
+                  <span [ngStyle]="{
+                      'color': event.status === 'En Cours' ? '#ff9800' :
+                               event.status === 'Refusé' ? '#f44336' :
+                               event.status === 'Traité' ? '#4caf50' : ''
+                    }">
+                    {{ event.status }}
+                  </span>
+                </td>
+                <td>
+                  <button *ngIf="event.status=='En Cours'" (click)="opendeleteEventModal(event)" class="btn btn-danger btn-sm">Supprimer</button>
+                  <a [routerLink]="['/dashboard/client/event-details/', event.id]" class="btn btn-info btn-sm">Details</a>
+                  <button *ngIf="event.status=='En Cours'" (click)="updateEventStatus(event.id!,'Traité')" class="btn btn-success btn-sm">Traité</button>
+                  <button *ngIf="event.status=='En Cours'" (click)="updateEventStatus(event.id!,'Refusé')" class="btn btn-danger btn-sm">Refusé</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <!-- Pagination Controls -->
+          <div class="pagination-controls d-flex justify-content-center mt-3">
+            <ul class="pagination">
+              <li class="page-item" [ngClass]="{ disabled: currentPage === 0 }">
+                <a (click)="prevPage()" class="page-link">Prev</a>
+              </li>
+              <li *ngFor="let page of [].constructor(totalPages); let i = index" [ngClass]="{ active: i === currentPage }">
+                <a (click)="goToPage(i)" class="page-link">{{ i + 1 }}</a>
+              </li>
+              <li class="page-item" [ngClass]="{ disabled: currentPage === totalPages - 1 }">
+                <a (click)="nextPage()" class="page-link">Next</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showEventModal}" [ngStyle]="{'display': showEventModal ? 'block' : 'none'}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Événement</h5>
+                <button type="button" class="btn-close" aria-label="Close" (click)="closeAddEventModal()"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                   
+
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                               <select id="type" class="form-select" [(ngModel)]="newEvent.type" name="type" required>
+                                <option value="" disabled selected>Sélectionner le Type</option>
+                                <option value="Type 1">Type 1</option>
+                                <option value="Type 2">Type 2</option>
+                                <option value="Type 3">Type 3</option>
+                            </select>
+                        <div *ngIf="!newEvent.type && submit" class="text-danger">Le type est requis.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" class="form-control" placeholder="Description de l'événement"
+                                  [(ngModel)]="newEvent.description" name="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="timestamp" class="form-label">Date et Heure</label>
+                        <input type="datetime-local" id="timestamp" class="form-control" 
+                               [(ngModel)]="newEvent.timestamp" name="timestamp" required>
+                        <div *ngIf="!newEvent.timestamp && submit" class="text-danger">La date et l'heure sont requises.</div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="orderTransportId" class="form-label">ID de la Commande de Transport</label>
+                      
+                      <select id="orderTransportId" class="form-control" [(ngModel)]="newEvent.orderTransportId" name="orderTransportId">
+                        <option [value]=0 disabled selected>Sélectionner un Order de Transport</option>
+                        <option *ngFor="let order of orders" [value]="order.id">
+                          {{ order.id }} - {{ order.nomClient }}
+                        </option>
+                      </select>
+                      
+                  </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Emplacement</label>
+                        <input type="text" id="location" class="form-control" placeholder="Emplacement de l'événement"
+                               [(ngModel)]="newEvent.location" name="location" required>
+                        <div *ngIf="!newEvent.location && submit" class="text-danger">L'emplacement est requis.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="impactLevel" class="form-label">Niveau d'Impact</label>
+                        <select id="impactLevel" class="form-select" [(ngModel)]="newEvent.impactLevel" name="impactLevel" required>
+                            <option value="" disabled selected>Sélectionner le niveau d'impact</option>
+                            <option value="Faible">Faible</option>
+                            <option value="Moyen">Moyen</option>
+                            <option value="Élevé">Élevé</option>
+                        </select>
+                        <div *ngIf="!newEvent.impactLevel && submit" class="text-danger">Le niveau d'impact est requis.</div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="addEvent()">Ajouter</button>
+                <button type="button" class="btn btn-secondary" (click)="closeAddEventModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showdeleteEventModal}" [ngStyle]="{'display': showdeleteEventModal ? 'block' : 'none'}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title">Vous Volez vraiment supprimer l'Événement </h5>
+                <button type="button" class="btn-close" aria-label="Close" (click)="closedeleteEventModal()"></button>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="deleteEvent()">Supprimer</button>
+                <button type="button" class="btn btn-secondary" (click)="closedeleteEventModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
