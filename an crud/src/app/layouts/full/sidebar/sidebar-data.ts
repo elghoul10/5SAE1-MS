@@ -42,9 +42,9 @@ export const navItems: NavItem[] = [
     route: '/',
   },
   {
-    displayName: 'Clubs',
+    displayName: 'Clients',
     iconName: 'users-group',
-    route: '/dashboard/clubs',
+    route: '/dashboard/clients',
   },
   // {
   //   navCap: 'Ui Components',

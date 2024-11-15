@@ -8,50 +8,40 @@ import tn.esprit.Ordre.Services.IOrdreService;
 
 import java.util.List;
 
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/ordre")
+
 public class ordreController {
     IOrdreService actualiteService;
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/addActualite")
     Ordre addActualite(@RequestBody Ordre ordre){
         return actualiteService.addActualite(ordre);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/getOneActualite/{id}")
     Ordre getActualite(@PathVariable Long id){
         return actualiteService.getActualite(id);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     List<Ordre> getAllActualites(){
         return actualiteService.getAllActualites();
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/deleteActualite/{id}")
     void deleteClubById(@PathVariable Long id){
         this.actualiteService.deleteActualiteById(id);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/updateActualite")
     Ordre updateActualite(@RequestBody Ordre ordre){
         return  this.actualiteService.updateActualite(ordre);
     }
 
-//    @CrossOrigin(origins = "*", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
-    @PostMapping("/uploadImage/{id}")
-    public Ordre handleImageFileUpload(@RequestParam("fileImage") MultipartFile fileImage, @PathVariable long id) {
-        return actualiteService.handleImageFileUpload(fileImage,id);
-    }
 
 
-    /*****************************************/
-
-    @PostMapping("/shareFb/{id}")
-    public String shareFb(@PathVariable Long id){
-        return actualiteService.shareFb(id);
-    }
 
 }

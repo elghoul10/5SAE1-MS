@@ -5,6 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -17,14 +23,10 @@ import java.util.Date;
 public class Ordre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idActualite;
-    String titreActualite;
-
-    @Column(columnDefinition = "TEXT")
-    String descriptionActualite;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    Date dateActualite;
-    String imageActualite;
+    Long id;
+    String nomClient;
+    String descriptionOrdre;
+    String Cin;
+    String Num;
 
 }

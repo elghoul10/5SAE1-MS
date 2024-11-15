@@ -1,0 +1,124 @@
+<h1 mat-dialog-title style="margin-bottom: 1rem">Add Client</h1>
+<div class="section__title-wrapper">
+  <h2 mat-dialog-title class="section__title">
+    Get in<span class="yellow-bg yellow-bg-big"
+      >touch <img src="./assets/images/shape/yellow-bg.png" alt=""
+    /></span>
+  </h2>
+</div>
+
+<div mat-dialog-content>
+  <div class="contact__form">
+    <form #f="ngForm" (ngSubmit)="submitForm(f)">
+      <div class="row">
+        <!-- Image Upload Section -->
+        <div class="col-12 m-b-30">
+          <div class="contact__form-input__image__container">
+            <img
+              class="contact__form-input__image"
+              [src]="imageUrl"
+              alt="Image Preview"
+            />
+          </div>
+          <div class="contact__form-input contact__form-input__image__btns">
+            <input
+              type="file"
+              accept="image/*"
+              id="imageActualite"
+              name="imageActualite"
+              ngModel
+              #fileInput
+              style="display: none"
+              (change)="onFileSelected($event)"
+            />
+            <button
+              type="button"
+              mat-flat-button
+              class="Extended-Fab"
+              (click)="triggerFileInputClick()"
+            >
+              Select Image
+            </button>
+            <button
+              type="button"
+              mat-flat-button
+              class="Extended-Fab Extended-Fab--2 m-l-16"
+              (click)="resetAvatarImage()"
+            >
+              Reset Image
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Fields for Ordre attributes -->
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label class="contact__form-input-label" for="nomClient"
+              >Nom Client</label
+            >
+            <input
+              #nomField="ngModel"
+              type="text"
+              placeholder="Nom Client"
+              id="nomClient"
+              name="nomClient"
+              ngModel
+              required
+              minlength="3"
+            />
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="Description">Description Ordre</label>
+            <textarea
+              #descField="ngModel"
+              placeholder="Enter the description"
+              id="descriptionOrdre"
+              name="descriptionOrdre"
+              ngModel
+              required
+              minlength="3"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label class="contact__form-input-label" for="Cin">CIN</label>
+            <input
+              #cinField="ngModel"
+              type="text"
+              placeholder="CIN"
+              id="Cin"
+              name="Cin"
+              ngModel
+              required
+              minlength="8"
+            />
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label class="contact__form-input-label" for="Num">Numéro</label>
+            <input
+              #numField="ngModel"
+              type="text"
+              placeholder="Numéro"
+              id="Num"
+              name="Num"
+              ngModel
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-12" style="margin-top: 1rem">
+          <button type="submit" mat-flat-button color="primary">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

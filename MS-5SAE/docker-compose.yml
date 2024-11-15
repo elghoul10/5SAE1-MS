@@ -11,6 +11,21 @@ services:
     restart: unless-stopped
     depends_on:
       - eureka
+      
+  reclamation-node:
+    build:
+      context: .\reclamation-MS
+      dockerfile: dockerfile
+    image: "node-img"
+    container_name: "reclamation-node"
+    ports:
+      - "3000:3000"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=discovery
+      - app_file_storage_mapping=file:/app/upload-directory
+    restart: unless-stopped
+    depends_on:
+      - eureka
 
   article:
     build: .\article
@@ -40,6 +55,21 @@ services:
       - eureka
       - mysql-db
 
+  chauffeur:
+    build: .\Chauffeur
+    image: "chauffeur"
+    container_name: chauffeur
+    ports:
+      - "9098:9098"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/Chauffeur_BD?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    restart: unless-stopped
+    depends_on:
+      - eureka
+      - mysql-db
   ordre:
     build: .\OrdredeTrans
     image: "order.jar"
@@ -55,7 +85,21 @@ services:
     depends_on:
       - eureka
       - mysql-db
-
+  user:
+    build: .\UserMS
+    image: "user.jar"
+    container_name: user
+    ports:
+      - "8084:8084"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/OrdreTransportBD?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    restart: unless-stopped
+    depends_on:
+      - eureka
+      - mysql-db
   eureka:
     build: .\EurekaD
     image: "eureka-img"
@@ -89,10 +133,17 @@ services:
       - spring_cloud_gateway_routes[3]_uri=http://ordre:8085
       - spring_cloud_gateway_routes[3]_predicates[0]=Path=/ordre/**
 
+      - spring_cloud_gateway_routes[4]_id=reclamation
+      - spring_cloud_gateway_routes[4]_uri=http://reclamation-node:3000
+      - spring_cloud_gateway_routes[4]_predicates[0]=Path=/reclamations/**
 
-      - spring_cloud_gateway_routes[4]_id=user
-      - spring_cloud_gateway_routes[4]_uri=http://user:8085
-      - spring_cloud_gateway_routes[4]_predicates[0]=Path=/Users/**
+      - spring_cloud_gateway_routes[5]_id=user
+      - spring_cloud_gateway_routes[5]_uri=http://user:8084
+      - spring_cloud_gateway_routes[5]_predicates[0]=Path=/users/**
+
+      - spring_cloud_gateway_routes[6]_id=chauffeur
+      - spring_cloud_gateway_routes[6]_uri=http://chauffeur:9098
+      - spring_cloud_gateway_routes[6]_predicates[0]=Path=/chauffeur/**
 
     depends_on:
       - eureka
@@ -100,6 +151,9 @@ services:
       - ordre
       - article
       - client
+      - reclamation-node
+      - chauffeur
+      - user
 
   mysql-db:
     image: "mysql:5.6"
@@ -110,6 +164,7 @@ services:
       - "3306:3306"
     restart: unless-stopped
 
+<<<<<<< HEAD
   user:
     container_name: userservice
     image: "userservice"
@@ -140,3 +195,5 @@ services:
 
 
 
+=======
+>>>>>>> 6544926141c062ab1bde5d2ebff3dbdf1448836f

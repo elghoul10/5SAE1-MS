@@ -27,6 +27,7 @@ import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
 import { UniversityModule } from './manage-university/university.module';
 import { ClubModule } from './manage-club/club.module';
+import { TransportModule } from './manage-TransportB/Transport.module';
 import { PreLoaderComponent } from './layouts/front/pre-loader/pre-loader.component';
 import { BackToTopComponent } from './layouts/front/back-to-top/back-to-top.component';
 import { NavbarComponent } from './layouts/front/navbar/navbar.component';
@@ -70,6 +71,7 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     UniversityModule,
     ClubModule,
+    TransportModule,
     NgxWebrtcModule,
   ],
   exports: [TablerIconsModule],

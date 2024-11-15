@@ -10,4 +10,6 @@ public interface IClientService {
     List<Client> getAll();
     void delete(long id);
     Client update(Client client);
+
+    public String shareFb(Long id);
 }

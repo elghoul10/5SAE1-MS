@@ -29,6 +29,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
       },
+
+      {
+        path: 'transport',
+        loadChildren: () =>
+          import('./manage-TransportB/Transport.module').then(
+            (m) => m.TransportModule
+          ),
+      },
       {
         path: '',
         loadChildren: () =>
@@ -66,6 +74,14 @@ const routes: Routes = [
       {
         path: 'signup',
         component: SignupComponent,
+      },
+
+      {
+        path: 'transport',
+        loadChildren: () =>
+          import('./manage-TransportB/Transport.module').then(
+            (m) => m.TransportModule
+          ),
       },
 
       {

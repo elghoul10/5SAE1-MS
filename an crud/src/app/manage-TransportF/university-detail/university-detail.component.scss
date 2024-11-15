@@ -1,0 +1,24 @@
+.Extended-Fab--social {
+  border-radius: 200rem !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  &__icon {
+    display: inline-block;
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+}
+
+.uni__img {
+  &__container {
+    width: 100%;
+    height: 20rem;
+  }
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

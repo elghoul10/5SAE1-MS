@@ -1,0 +1,13 @@
+<div class="card">
+  <h1>Angular Star Rating</h1>
+  <br />
+  <div class="vcv">
+    <span
+      *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+      (click)="setRating(i + 1)"
+      class="star"
+      >★</span
+    >
+  </div>
+  <h3 #output id="output">Rating is: 0/5</h3>
+</div>

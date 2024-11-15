@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ClubService {
-  private base = 'http://localhost:8083/clients';
+  private base = 'http://localhost:8082/clients';
 
   constructor(private http: HttpClient) {}
 
