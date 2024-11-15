@@ -16,9 +16,9 @@ public interface IOrdreService {
 
     Ordre updateActualite(Ordre ordre);
 
-    Ordre handleImageFileUpload(MultipartFile fileImage, long id);
 
-    String shareFb(Long id);
+
+
 
     //**********************************************
 

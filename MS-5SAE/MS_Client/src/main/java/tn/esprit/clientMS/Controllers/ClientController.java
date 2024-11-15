@@ -17,42 +17,48 @@ public class ClientController {
     ClientService specialiteService;
     FileStorageService fileStorageService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     List<Client> getAll(){
         return specialiteService.getAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     Client add(@RequestBody Client client){
         return  specialiteService.add(client);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
     Client getById(@PathVariable long id){
         return specialiteService.getById(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping
     Client update(@RequestBody Client client){
         return  specialiteService.update(client);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/{id}")
     void delete(@PathVariable long id){
         specialiteService.delete(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/uploadPdf/{id}")
     public Client handlePlanEtudeFileUpload(@RequestParam("file") MultipartFile file, @PathVariable long id) {
         return specialiteService.handlePlanEtudeFileUpload(file,id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/uploadImage/{id}")
     public Client handleImageFileUpload(@RequestParam("fileImage") MultipartFile fileImage, @PathVariable long id) {
         return specialiteService.handleImageFileUpload(fileImage,id);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/addWithFile")
     public Client addWithFile(@RequestParam("nom") String nom,
                               @RequestParam("diplome") String diplome,
@@ -78,4 +84,11 @@ public class ClientController {
 
         return specialiteService.add(client);
     }
+
+
+    @PostMapping("/shareFb/{id}")
+    public String shareFb(@PathVariable Long id) {
+        return specialiteService.shareFb(id);
+    }
+
 }

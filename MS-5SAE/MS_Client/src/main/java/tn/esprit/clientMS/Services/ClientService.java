@@ -6,6 +6,12 @@ import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.clientMS.Repositories.ClientRepository;
 import tn.esprit.clientMS.entities.Client;
 
+
+import facebook4j.Facebook;
+import facebook4j.FacebookException;
+import facebook4j.FacebookFactory;
+import facebook4j.auth.AccessToken;
+
 import java.util.List;
 
 @Service
@@ -62,5 +68,31 @@ public class ClientService implements IClientService {
         Client client = clientRepository.findById(id).orElse(null);
         client.setImageUrl(fileName);
         return clientRepository.save(client);
+    }
+
+
+    @Override
+    public String shareFb(Long id){
+        String appId = "930407181631867";
+        String appSecret = "459e8c9e7384671c47216db0961d126c";
+        String accessTokenString = "EAANOM02OwXsBO9XsXVu7oLA6CkoZAdRqlHghsRvgrnU1KzGqKmMaOrfu1Fbqb2R1X5X1tlpRSzJd1v0MdkCx8JCFy49UVmse57e6pBJY8KEUIE2dZBkW9wTT2gCGqyf6PE5P9WFvtDYjLv24WZANvT4MTxoeRaj4kgHiEzLYrSvhOnPU2AywGRZCWVhvFFJLAQ2yvZAz5c0dqLZAZB4ALTKkagZD";
+
+        // Set up Facebook4J
+        Facebook facebook = new FacebookFactory().getInstance();
+        facebook.setOAuthAppId(appId, appSecret);
+        facebook.setOAuthAccessToken(new AccessToken(accessTokenString, null));
+
+        // Post a status message
+        Client actualite = clientRepository.findById(id).orElse(null);
+
+        String message = "New Post :" + "\n"+ actualite.getNom() + "\n" + actualite.getDescription()+ "\n" + actualite.getImageUrl()+ "\n";
+        try {
+            facebook.postStatusMessage(message);
+            return "Status message posted successfully.";
+        } catch (FacebookException e) {
+            e.printStackTrace();
+            System.err.println("Error posting status message: " + e.getMessage());
+            return  "Erreur";
+        }
     }
 }
