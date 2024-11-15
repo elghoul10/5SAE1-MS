@@ -126,6 +126,16 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka/
 
+    configserver:
+    build: .\configServer
+    image: "configserver-img"
+    container_name: "configserver"
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+    hostname: discovery
+
 
 
 
