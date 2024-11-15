@@ -7,9 +7,9 @@ Ce projet vise à fournir une plateforme centralisée pour la gestion des ordres
 
 ## Technologies 
 - __Back end des micro-services__ :Spring boot
-- __Front end :__Angular
-- __Base de donnée :__ MySql / H2 / Mongo db
-- __Technologies du micro service supplémentaire (gestion de reclamation) : __ Node JS / Mongo db
+- __Front end__ :Angular
+- __Base de donnée:__ MySql / H2 / Mongo db
+- __Technologies du micro service supplémentaire (gestion de reclamation) :__ Node JS / Mongo db
 
 ## Nom des membres de l'équipe 
 - Manel Walha
